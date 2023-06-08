@@ -2,22 +2,22 @@
 Nanosecond cpu usage plotter for linux
 
 
-Purpose : 
+# Purpose 
 The purpose of this program is to measure the utime (user time) and stime (system time) values of the desired application every 1 microsecond, in line with the specified time (often 10 seconds). It keeps these values ​​in a CSV file and outputs an SVG file (graphic) after the specified time.
 
-Build : 
+# Build
 Steps to build this program:
 First of all, if there is no Git: we install it by typing sudo apt-get install git. Then we can clone our project and run it with the make command.
 1) You can clone it with git clone &lt;repository_url&gt;. You must know the url of the file to be cloned.
 2)Go to the directory of the makefile and the file where the program is created.
 3)Terminale : You can build this program by typing 'make -f Makefile.mak'.
 
-Installation : 
+# Installation
 To install the program on the system:
 We go to the file path where our file is with the 'cd' command.
 Then we install our program on the system by typing 'sudo make -f Makefile.mak install' in the terminal.
 
-Run : 
+# Run  
 To run our program, you need to do:
 './ncup.sh process_name duration'
 from the terminal.
@@ -28,16 +28,16 @@ Another way to run the program after installing it:
 'gcc -o ncup ncup.c'
 './ncup Firefox'
 
-Contrib : 
+# Contrib  
 Contributions are welcome.
 
-Discussion : 
+# Discussion 
 My program is open for improvements. My program, which I run with Stat, is in a state of closing and opening every time it is read.
 The interval between each opening and closing is not 1 microsecond, it times out and makes delays.
 I preferred to write a wrapper with bash script for my program where I call the gnuplot command with the system() call.
 This is because my program is under development.
 
-
+# Screenshots
 Below are graphs showing the measured CPU values of some popular applications:
 ![systemd-journald_ncup](https://github.com/karadogankaan/nanosecond_cpu_usage_plotter/assets/134071144/4b4ddd66-215a-476d-93c0-756c68a0e3b0)
 ![firefox_ncup](https://github.com/karadogankaan/nanosecond_cpu_usage_plotter/assets/134071144/c32384a7-5e3e-402b-963d-2b6c1ccbb82d)
