@@ -8,9 +8,9 @@ The purpose of this program is to measure the utime (user time) and stime (syste
 # Build
 Steps to build this program:
 First of all, if there is no Git: we install it by typing sudo apt-get install git. Then we can clone our project and run it with the make command.
-1) You can clone it with git clone &lt;repository_url&gt;. You must know the url of the file to be cloned.
-2)Go to the directory of the makefile and the file where the program is created.
-3)Terminale : You can build this program by typing 'make -f Makefile.mak'.
+- You can clone it with git clone &lt;repository_url&gt;. You must know the url of the file to be cloned.
+- Go to the directory of the makefile and the file where the program is created.
+- Terminale : You can build this program by typing 'make -f Makefile.mak'.
 
 # Installation
 To install the program on the system:
