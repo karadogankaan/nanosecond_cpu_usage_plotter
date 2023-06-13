@@ -1,7 +1,7 @@
 #!/bin/bash
 
 csv_filename="cpu_usage.csv"  #Specifies the save name of the CSV file.
-svg_filename="Firefox_NCUP_$(date +%s).svg" #Specifies the name to save the SVG file.
+svg_filename="cpu_usage_$(date +%s).svg" #Specifies the name to save the SVG file.
 duration=10 #Specifies how many seconds the program will run.
 
 pid=$$ #It is used to get the PID (Process ID) value.
@@ -54,10 +54,11 @@ create_svg_graph() {
     local svg_filename=$2 #It takes the PID value and creates the SVG file.
 	#first creates a CSV file and then creates a line chart using that CSV file and saves it to a file in SVG format. This is used to graph the trading time.
     gnuplot <<EOF
-set terminal svg
+set terminal svg enhanced background rgb 'white' size 1920, 1080
 set output "$svg_filename"
 set datafile separator ","
-plot "$csv_filename" using 1:2 with lines title 'User Time', '' using 1:3 with lines title 'System Time'
+set xrange [0:]
+plot "$csv_filename" using 0.0000000001:2 with lines title 'User Time', '' using 0.0000000001:3 with lines title 'System Time'
 EOF
 #Eof = End Of File
 }
