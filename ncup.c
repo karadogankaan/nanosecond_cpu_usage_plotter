@@ -76,7 +76,7 @@ void create_csv_file(const char* filename, int duration, pid_t pid){
 // Creates an SVG file using data from the CSV file:
 void create_svg_graph(const char* csv_filename, const char* svg_filename) { // The 'crate_svg_graph' function takes as parameters the name of a csv file called 'csv_filename' and the name of the SVG file to be created.
     char command[200]; // The command string contains the command to use to run gnuplot .
-    sprintf(command, "gnuplot -e \"set terminal svg; set output '%s'; set datafile separator ','; plot '%s' using 1:2 with lines title 'User Time', '' using 1:3 with lines title 'System Time'\"", svg_filename, csv_filename);
+    sprintf(command, "gnuplot -e \"set terminal svg; set output '%s'; set datafile separator ','; plot '%s' using 0.0000000001:2 with lines title 'User Time', '' using 0.0000000001:3 with lines title 'System Time'\"", svg_filename, csv_filename);
     // The sprintf function creates the command formatted into the 'command' array.
     // With the %s token, the values 'svg_filename' and 'csv_filename' are put into the array.
     system(command); // The system function runs the generated command command by the operating system.
