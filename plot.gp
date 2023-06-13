@@ -8,4 +8,4 @@ set xlabel 'Time'
 set ylabel 'Value'
 set style line 1 linewidth 2
 set boxwidth 2
-plot "$csv_filename" using 1:2 with lines title 'User Time', '' using 1:3 with lines title 'System Time'
+plot "$csv_filename" using 0.0000000001:2 with lines title 'User Time', '' using 0.0000000001:3 with lines title 'System Time'
