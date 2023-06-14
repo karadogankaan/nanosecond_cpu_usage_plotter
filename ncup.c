@@ -9,7 +9,7 @@
 void create_csv_file(const char* filename, int duration, pid_t pid){ 
     FILE* csv_file = fopen(filename, "w"); // It creates the file with the fopen function.
     if (csv_file == NULL) { // If the file cannot be created;
-        printf("Dosya oluşturma hatası: %s\n", filename); // Error unable to create file
+        printf("File creation error: %s\n", filename); // Error unable to create file
         return;
     }
 
@@ -28,7 +28,7 @@ void create_csv_file(const char* filename, int duration, pid_t pid){
 
         FILE* stat_file = fopen(stat_filename, "r"); // With fopen, it opens the file in the 'stat_file' path in read mode and assigns it to the 'stat_file' variable.
         if (stat_file == NULL) {  // Considering that the file cannot be opened properly;
-            printf("Hata: %s dosyası açılamadı.\n", stat_filename); // The error message to be given.
+            printf("Error: %s file dont open.\n", stat_filename); // The error message to be given.
             return; // The loop terminates.
         }
 
@@ -75,8 +75,8 @@ void create_csv_file(const char* filename, int duration, pid_t pid){
 
 // Creates an SVG file using data from the CSV file:
 void create_svg_graph(const char* csv_filename, const char* svg_filename) { // The 'crate_svg_graph' function takes as parameters the name of a csv file called 'csv_filename' and the name of the SVG file to be created.
-    char command[200]; // The command string contains the command to use to run gnuplot .
-    sprintf(command, "gnuplot -e \"set terminal svg; set output '%s'; set datafile separator ','; plot '%s' using 0.0000000001:2 with lines title 'User Time', '' using 0.0000000001:3 with lines title 'System Time'\"", svg_filename, csv_filename);
+    char command[512]; // The command string contains the command to use to run gnuplot .
+    snprintf(command,sizeof(command), "gnuplot -e \"set terminal svg enhanced background rgb 'white' size 1920, 1080; set output '%s'; set datafile separator ','; plot '%s' using 1:2 with lines title 'User Time', '' using 1:3 with lines title 'System Time'\"", svg_filename, csv_filename);
     // The sprintf function creates the command formatted into the 'command' array.
     // With the %s token, the values 'svg_filename' and 'csv_filename' are put into the array.
     system(command); // The system function runs the generated command command by the operating system.
@@ -88,7 +88,7 @@ int main() {
     const char* csv_filename = "cpu_usage.csv";  // The name of the csv file to be created.
     char svg_filename[200]; // Specifies the size of the array.
     time_t current_time = time(NULL); // The variable 'current_time' is defined with the time(NULL) function for current time information.
-    sprintf(svg_filename, "Firefox_NCUP_%ld.svg", current_time); // The 'sprintf' function generates the name of the SVG file. The current_time value is placed in its place in the SVG file.
+    sprintf(svg_filename, "cpu_usage_%ld.svg", current_time); // The 'sprintf' function generates the name of the SVG file. The current_time value is placed in its place in the SVG file.
     int duration = 10;  // It will continue for 10 seconds.
 
     pid_t pid = getpid(); // Gets the PID of the current process.
