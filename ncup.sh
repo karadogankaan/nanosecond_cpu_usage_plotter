@@ -1,11 +1,19 @@
 #!/bin/bash
 
+
+process_name="$1"
 csv_filename="cpu_usage.csv"  #Specifies the save name of the CSV file.
 svg_filename="cpu_usage_$(date +%s).svg" #Specifies the name to save the SVG file.
 duration=10 #Specifies how many seconds the program will run.
 
-pid=$$ #It is used to get the PID (Process ID) value.
 
+if pgrep "$process_name" >/dev/null; then
+    echo "Process name '$process_name' there is a process running with"
+else
+    echo "Process name '$process_name' could not find a running process."
+    exit 1
+fi
+pid=$$  #It is used to get the PID (Process ID) value.
 create_csv_file() {
     local filename=$1 #The name of the CSV file to be created.
     local duration=$2 #Time value to save.
@@ -21,7 +29,7 @@ create_csv_file() {
     while [ $current_time -lt $end_time ]; do #it continues the loop to check the status of the process for a certain time.
         stat_filename="/proc/$pid/stat" #Specifies the name of the /proc/$pid/stat file.
         if [ ! -f "$stat_filename" ]; then #Checks if the file defined as $stat_filename exists.
-            echo "Hata: $stat_filename dosyası bulunamadı."  #Error when the file cannot be created.
+            echo "Error: $stat_filename file not found."  #Error when the file cannot be created.
             return
         fi
 
@@ -44,7 +52,7 @@ create_csv_file() {
         echo "$(date +%s),$user_percent,$system_percent" >> "$filename"
         #adds a row with calculated percentages of time and current time.
 
-        sleep 0.001 #We control how many seconds the program will measure.
+        sleep 0.000000001 #We control how many seconds the program will measure.
         current_time=$(date +%s) #Exports time information from SVG and CSV file.
     done
 }
@@ -66,5 +74,5 @@ EOF
 create_csv_file "$csv_filename" "$duration" "$pid"
 create_svg_graph "$csv_filename" "$svg_filename"
 
-echo "CSV dosyası '$csv_filename' olarak oluşturuldu."
-echo "SVG dosyası '$svg_filename' olarak oluşturuldu."
+echo "CSV file '$csv_filename' was created as."
+echo "SVG file '$svg_filename' was created as."
