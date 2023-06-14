@@ -96,8 +96,8 @@ int main() {
     create_csv_file(csv_filename, duration, pid); // It saves CPU usage data to csv file.
     create_svg_graph(csv_filename, svg_filename); // Creates an SVG file.
 
-    printf("CSV dosyası '%s' olarak oluşturuldu.\n", csv_filename);
-    printf("SVG dosyası '%s' olarak oluşturuldu.\n", svg_filename);
+    printf("CSV file '%s' was created as.\n", csv_filename);
+    printf("SVG file '%s' was created as.\n", svg_filename);
     // The names of the created files are printed on the screen.
 
     return 0;
