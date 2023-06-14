@@ -39,9 +39,9 @@ This is because my program is under development.
 
 # Screenshots
 Below are graphs showing the measured CPU values of some popular applications:
-- ![firefox_ncup](https://github.com/karadogankaan/nanosecond_cpu_usage_plotter/assets/134071144/727cf3cf-d07b-4ad0-849e-08be37596120)
+- Firefox ![firefox_ncup](https://github.com/karadogankaan/nanosecond_cpu_usage_plotter/assets/134071144/727cf3cf-d07b-4ad0-849e-08be37596120)
 
-- ![systemd_ncup](https://github.com/karadogankaan/nanosecond_cpu_usage_plotter/assets/134071144/86eb235d-8201-41ce-b510-bfeb7ba994ae)
+- Systemd ![systemd_ncup](https://github.com/karadogankaan/nanosecond_cpu_usage_plotter/assets/134071144/86eb235d-8201-41ce-b510-bfeb7ba994ae)
 
 
 
