@@ -10,12 +10,12 @@ Steps to build this program:
 First of all, if there is no Git: we install it by typing sudo apt-get install git. Then we can clone our project and run it with the make command.
 - You can clone it with git clone &lt;repository_url&gt;. You must know the url of the file to be cloned.
 - Go to the directory of the makefile and the file where the program is created.
-- Terminale : You can build this program by typing `make -f Makefile.mak` .
+- Terminale : You can build this program by typing `make` .
 
 # Installation
 To install the program on the system:
 We go to the file path where our file is with the `cd` command.
-Then we install our program on the system by typing `sudo make -f Makefile.mak install` in the terminal.
+Then we install our program on the system by typing `sudo make -f Makefile install` in the terminal.
 
 # Run  
 To run our program, you need to do:
