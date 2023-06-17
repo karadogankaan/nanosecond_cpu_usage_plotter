@@ -3,7 +3,7 @@ Nanosecond cpu usage plotter for linux
 
 
 # Purpose 
-The purpose of this program is to measure the utime (user time) and stime (system time) values of the desired application every 1 microsecond, in line with the specified time (often 10 seconds). It keeps these values ​​in a CSV file and outputs an SVG file (graphic) after the specified time.
+The purpose of this program is to measure the utime (user time) and stime (system time) values of the desired application every 1 microsecond, in line with the specified time (often 10 seconds). It keeps these values in a CSV file and outputs an SVG file (graphic) after the specified time.
 
 # Build
 Steps to build this program:
@@ -39,9 +39,11 @@ This is because my program is under development.
 
 # Screenshots
 Below are graphs showing the measured CPU values of some popular applications:
-- Firefox ![firefox_ncup](https://github.com/karadogankaan/nanosecond_cpu_usage_plotter/assets/134071144/727cf3cf-d07b-4ad0-849e-08be37596120)
+- Firefox ![firefox_ncup](https://github.com/karadogankaan/nanosecond_cpu_usage_plotter/assets/134071144/de7604e2-7921-417a-824f-a6377ad04ed7)
 
-- Systemd ![systemd_ncup](https://github.com/karadogankaan/nanosecond_cpu_usage_plotter/assets/134071144/86eb235d-8201-41ce-b510-bfeb7ba994ae)
+
+- Systemd ![systemd_ncup](https://github.com/karadogankaan/nanosecond_cpu_usage_plotter/assets/134071144/c3e8e7a2-5a53-4135-bc51-24816d624279)
+
 
 
 
