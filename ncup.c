@@ -12,7 +12,7 @@ void create_csv_file(const char* filename, int duration, pid_t pid){
         printf("File creation error: %s\n", filename); // Error unable to create file
         return;
     }
-
+	
     fprintf(csv_file, "Timestamp,User Time (%%),System Time (%%)\n"); // Writing the starting columns in the CSV file in order.
 
     // Defines the variables for time operations, gives an initial value.
@@ -22,7 +22,7 @@ void create_csv_file(const char* filename, int duration, pid_t pid){
 
     // It uses the file /proc/[pid]/stat to read statistics about the process.
     while (current_time < end_time) {  // Time values  used to control the loop.
-        char stat_filename[50]; //It keeps the path to the /proc/[pid]/stat file created using (pid).
+        char stat_filename[700]; //It keeps the path to the /proc/[pid]/stat file created using (pid).
         sprintf(stat_filename, "/proc/%d/stat", pid); // The format specifier %d and the variable 'pid' are placed in this array.
         //The sprintf function creates the path to /proc/[pid]/stat.
 
@@ -31,7 +31,7 @@ void create_csv_file(const char* filename, int duration, pid_t pid){
             printf("Error: %s file dont open.\n", stat_filename); // The error message to be given.
             return; // The loop terminates.
         }
-
+	
         unsigned long long utime = 0; //  Calculates 'utime' (user time) using statistics information from /proc/[pid]/stat.
         unsigned long long stime = 0; //  Calculates 'stime' (system time) using statistics information from the /proc/[pid]/stat file.
 
@@ -66,7 +66,7 @@ void create_csv_file(const char* filename, int duration, pid_t pid){
 
         fprintf(csv_file, "%ld,%.2lf,%.2lf\n", time(NULL), user_percent, system_percent); // Prints data in the specified format to a CSV file. time(NULL) -&gt; current time information
         // 'user_percent' -&gt; user time percentage, 'system_percent' -&gt; system time percentage.
-        usleep(1);  // 1 microsecond wait (delay).
+        usleep(0.000001);  // 1 microsecond wait (delay).
         current_time = time(NULL); // It is updated with the time(NULL) function to get the current time information.
     }
 
@@ -76,7 +76,7 @@ void create_csv_file(const char* filename, int duration, pid_t pid){
 // Creates an SVG file using data from the CSV file:
 void create_svg_graph(const char* csv_filename, const char* svg_filename) { // The 'crate_svg_graph' function takes as parameters the name of a csv file called 'csv_filename' and the name of the SVG file to be created.
     char command[512]; // The command string contains the command to use to run gnuplot .
-    snprintf(command,sizeof(command), "gnuplot -e \"set terminal svg enhanced background rgb 'white' size 1920, 1080; set output '%s'; set datafile separator ','; plot '%s' using 1:2 with lines title 'User Time', '' using 1:3 with lines title 'System Time'\"", svg_filename, csv_filename);
+    snprintf(command,sizeof(command), "gnuplot -e \"set terminal svg enhanced background rgb 'white' size 1920, 1080; set output '%s'; set title 'Nanosecond CPU Usage Plotter'; set datafile separator ','; plot '%s' using 1:2 with lines title 'User Time', '' using 1:3 with lines title 'System Time'\"", svg_filename, csv_filename);
     // The sprintf function creates the command formatted into the 'command' array.
     // With the %s token, the values 'svg_filename' and 'csv_filename' are put into the array.
     system(command); // The system function runs the generated command command by the operating system.
@@ -86,10 +86,10 @@ void create_svg_graph(const char* csv_filename, const char* svg_filename) { // T
 
 int main() {
     const char* csv_filename = "cpu_usage.csv";  // The name of the csv file to be created.
-    char svg_filename[200]; // Specifies the size of the array.
+    char svg_filename[1000]; // Specifies the size of the array.
     time_t current_time = time(NULL); // The variable 'current_time' is defined with the time(NULL) function for current time information.
     sprintf(svg_filename, "cpu_usage_%ld.svg", current_time); // The 'sprintf' function generates the name of the SVG file. The current_time value is placed in its place in the SVG file.
-    int duration = 10;  // It will continue for 10 seconds.
+    int duration = 11;  // It will continue for 10 seconds.
 
     pid_t pid = getpid(); // Gets the PID of the current process.
 
