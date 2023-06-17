@@ -4,11 +4,11 @@
 process_name="$1"
 csv_filename="cpu_usage.csv"  #Specifies the save name of the CSV file.
 svg_filename="cpu_usage_$(date +%s).svg" #Specifies the name to save the SVG file.
-duration=10 #Specifies how many seconds the program will run.
+duration=12 #Specifies how many seconds the program will run.
 
 
 if pgrep "$process_name" >/dev/null; then
-    echo "Process name '$process_name' there is a process running with"
+    echo "Process name '$process_name' there is a process running with" #argumans control
 else
     echo "Process name '$process_name' could not find a running process."
     exit 1
@@ -52,7 +52,7 @@ create_csv_file() {
         echo "$(date +%s),$user_percent,$system_percent" >> "$filename"
         #adds a row with calculated percentages of time and current time.
 
-        sleep 0.000000001 #We control how many seconds the program will measure.
+        sleep 0.00000001 #We control how many seconds the program will measure.
         current_time=$(date +%s) #Exports time information from SVG and CSV file.
     done
 }
@@ -63,10 +63,18 @@ create_svg_graph() {
 	#first creates a CSV file and then creates a line chart using that CSV file and saves it to a file in SVG format. This is used to graph the trading time.
     gnuplot <<EOF
 set terminal svg enhanced background rgb 'white' size 1920, 1080
+set title 'Nanosecond CPU Usage Plotter'
+set xlabel "Time [miliseconds]"
+set ylabel "%CPU USAGE"
+set tics out
+set autoscale y
+set tics font ", 10"
 set output "$svg_filename"
 set datafile separator ","
-set xrange [0:]
-plot "$csv_filename" using 0.0000000001:2 with lines title 'User Time', '' using 0.0000000001:3 with lines title 'System Time'
+set yrange [0:100]
+set xrange [0:1200]
+set xtics ("500 ms" 50, "1000 ms" 100, "1500 ms" 150, "2000 ms" 200, "2500 ms" 250, "3000 ms" 300, "3500 ms" 350, "4000 ms" 400, "4500 ms" 450, "5000 ms" 500, "5500 ms" 550, "6000 ms" 600, "6500 ms" 650, "7000 ms" 700, "7500 ms" 750, "8000 ms" 800, "8500 ms" 850, "9000 ms" 900, "9500 ms" 950, "10000 ms" 1000, "10500 ms" 1050, "11000 ms" 1100, "11500 ms" 1150, "12000 ms" 1200)
+plot "$csv_filename" using 0.000001:2 with lines title 'User Time', '' using 0.000001:3 with lines title 'System Time'
 EOF
 #Eof = End Of File
 }
